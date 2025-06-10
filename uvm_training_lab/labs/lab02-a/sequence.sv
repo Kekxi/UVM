@@ -4,7 +4,7 @@
 // sequence 控制并产生一系列transation
 // 一种sequence 一般只用来产生一种类型的transation
 // sequence中最重要的部分是body()任务
-class my_sequence extends uvm_sequence #(my_transaction); // #(my_transation)参数化的类 指定sequence所产生的transaction的类型
+class my_sequence extends uvm_sequence #(my_transcation); // #(my_transation)参数化的类 指定sequence所产生的transaction的类型
     `uvm_object_utils (my_sequence)
     function new(string name = "my_sequence");
         super.new(name);

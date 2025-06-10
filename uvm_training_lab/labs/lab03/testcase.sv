@@ -24,7 +24,7 @@ class my_test extends uvm_tset;
             //在start_of_simulation_phase中打印本平台的结构
     virtual function void start_of_simulation_phase(uvm_phase phase);
         super.start_of_simulation_phase(phase);
-        uvm_top.print_topology(uvm_default_tree_printer);
+        uvm_top.print_topology();
     endfunction
 
 endclass

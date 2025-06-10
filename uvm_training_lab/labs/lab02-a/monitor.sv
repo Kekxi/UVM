@@ -6,6 +6,16 @@ class my_monitor extends uvm_monitor;
         super.new(name,parent);
     endfunction
 
+    virtual task reset_phase(uvm_phase phase);
+        //Monitor可以不需要添加 因为Driver里面已经添加 raise_objection和drop_objection
+        phase.raise_objection(this);
+        //确保延迟时间要小于Driver
+        // 建议每个组件都要添加
+        #50;
+        `uvm_info("MON_RESET_PHASE","Now driver reset the DUT ...",UVM_MEDIUM)
+        phase.drop_objection(this);
+    endtask
+
     virtual task run_phase(uvm_phase phase);
         forever begin
             `uvm_info("MON_RUN_PHASE","Montior run",UVM_MEDIUM)

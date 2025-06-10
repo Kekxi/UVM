@@ -6,12 +6,14 @@ program automatic test;
     `include "sequencer.sv"
     `include "driver.sv"
     `include "monitor.sv"
-    `include "environment.sv"
     `include "agent.sv"
+    `include "environment.sv"
     `include "testcase.sv"
+    `include "transaction_da3.sv"
+    `include "testcase_da3.sv"
     
     initial begin
-        run_test();
+        run_test("testcase_da3");
     end
 
 endprogram
