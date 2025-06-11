@@ -19,7 +19,7 @@ class my_test extends uvm_tset;
         //使用uvm_config机制配置agent sequencer的default_sequence
         uvm_config_db#(uvm_object_wrapper)::set(
                             this,  "*.m_seqr.run_phase",
-                            "default_sequence",my_sequencer::get_type());  
+                            "default_sequence",my_sequence::get_type());  
     endfunction
             //在start_of_simulation_phase中打印本平台的结构
     virtual function void start_of_simulation_phase(uvm_phase phase);

@@ -13,12 +13,9 @@ class my_driver extends uvm_driver #(my_transaction);
                 //run_phase()是driver的主要方法
     virtual task run_phase(uvm_phase phase);
         forever begin
-            //从sequencer中获取transaction
             seq_item_port.get_next_item(req);
-                                    //req.sprint()将获取的transaction打印出来
-            `uvm_info("DRV_RUN_PHASE",req.sprint(),UVM_MEDIUM)
-            #100;
-            //通知sequencer该事务已经处理完毕
+            `uvm_info("DRV_RUN_RUN_PHASE", req.sprint(), UVM_MEDIUM)
+            #100
             seq_item_port.item_done();
         end
     endtask

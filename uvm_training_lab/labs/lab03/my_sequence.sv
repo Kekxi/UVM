@@ -8,7 +8,7 @@ class my_sequence extends uvm_sequence #(my_transaction); // #(my_transation)参
     `uvm_object_utils (my_sequence)
     function new(string name = "my_sequence");
         super.new(name);
-        set_automatic_phase_objection(1);
+        set_automatic_phase_objection(1);// 启用自动phase objection管理
     endfunction
 
     virtual task body(); //sequence中最重要的部分是body()任务 
