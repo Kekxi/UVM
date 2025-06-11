@@ -2,7 +2,7 @@
 // 实例化和配置env
 // 配置需要启动sequence
 
-class my_test extends uvm_tset;
+class my_test extends uvm_test;
     `uvm_component_utils(my_test)
 
     my_env m_env;

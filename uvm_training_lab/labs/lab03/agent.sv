@@ -24,6 +24,7 @@ class master_agent extends uvm_agent;
     endfunction
     //connect_phase()将driver和sequencer的端口相连接 执行通信
     virtual function void connect_phase(uvm_phase phase);
+      super.connect_phase(phase);
       if(is_active == UVM_ACTIVE) 
             m_driv.seq_item_port.connect(m_seqr.seq_item_export);
       endfunction

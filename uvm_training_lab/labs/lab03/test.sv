@@ -11,6 +11,7 @@ program automatic test;
     `include "testcase.sv"
     `include "transaction_da3.sv"
     `include "testcase_da3.sv"
+    `include "testcase_inst_da3.sv"
     
     initial begin
         run_test("testcase_da3");

@@ -16,8 +16,6 @@ class my_sequence extends uvm_sequence #(my_transaction); // #(my_transation)参
         `uvm_do(req) //uvm内建的宏，用来产生transaction。每调用一次产生一个transaction
     end
     #100;
-    if(starting_phase != null)
-        starting_phase.drop_objection(this);
     endtask
 
 endclass
