@@ -1,4 +1,4 @@
-program automatic top_tb;
+// program automatic top_tb;
     `include "../../rtl/router.v"
 	 import uvm_pkg::*;
 	`include "uvm_macros.svh"
@@ -9,6 +9,8 @@ program automatic top_tb;
 	`include "my_driver.sv"
     `include "my_sequencer.sv"
 	`include "my_monitor.sv"
+    `include "agent_config.sv"
+	`include "env_config.sv"
 	`include "master_agent.sv"
 	`include "my_env.sv"
 	`include "my_test.sv"
@@ -17,7 +19,7 @@ program automatic top_tb;
 	`include "my_driver_count.sv"
 	// `include "my_test_type_driver.sv"
 	// `include "my_test_inst_driver.sv"
-endprogram
+// endprogram
 
 module top;
     bit sys_clk;
@@ -32,7 +34,7 @@ module top;
                 .dout      (inf.dout),
                 .busy_n    (inf.busy_n),
                 .valido_n  (inf.valido_n),
-                .frameo_n  (inf.frameo_n),
+                .frameo_n  (inf.frameo_n)
                 );
 
     initial begin
@@ -42,11 +44,11 @@ module top;
 
     initial begin
         uvm_config_db#(virtual dut_interface)::set(null,"uvm_test_top","top_if",inf);
-        run_test()
+        run_test();
     end
 
-    initial begin
-        $wlfdumpvars();
-    end
+    // initial begin
+    //     $wlfdumpvars();
+    // end
 
 endmodule

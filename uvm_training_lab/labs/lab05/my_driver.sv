@@ -12,42 +12,41 @@ class my_driver extends uvm_driver #(my_transaction);
 
     function new(string name= "my_driver",uvm_component parent);
         super.new(name,parent);
-        uvm_config_db#(virtual dut_interface)::get(this,"","vif",m_vif)
     endfunction
                 
-    // virtual task pre_reset_phase(uvm_phase phase);
-    //     super.pre_reset_phase(phase);
-    //     `uvm_info("TRACE",$sformatf("%m"), UVM_HIGH)
-    //     phase.raise_objection(this);
-    //     m_vif.driver_cb.frame_n <= `x;
-    //     m_vif.driver_cb.valid_n <= `x;
-    //     m_vif.driver_cb.din     <= `x;
-    //     m_vif.driver_cb.reset_n <= `x;
-    //     phase.drop_objection(this);
-    // endtask
+    virtual task pre_reset_phase(uvm_phase phase);
+        super.pre_reset_phase(phase);
+        `uvm_info("TRACE",$sformatf("%m"), UVM_HIGH)
+        phase.raise_objection(this);
+        m_vif.driver_cb.frame_n <= 'x;
+        m_vif.driver_cb.valid_n <= 'x;
+        m_vif.driver_cb.din     <= 'x;
+        m_vif.driver_cb.reset_n <= 'x;
+        phase.drop_objection(this);
+    endtask
                 
-    // virtual task reset_phase(uvm_phase phase);
-    //     super.reset_phase(phase);
-    //     `uvm_info("TRACE",$sformatf("%m"), UVM_HIGH)
-    //     phase.raise_objection(this);
-    //     m_vif.driver_cb.frame_n <= '1;
-    //     m_vif.driver_cb.valid_n <= '1;
-    //     m_vif.driver_cb.din     <= '0;
-    //     m_vif.driver_cb.reset_n <= '1;
-    //     repeat(5) @(m_vif.driver_cb);
-    //     m_vif.driver_cb.reset_n <= '0;
-    //     repeat(5) @(m_vif.driver_cb);
-    //     m_vif.driver_cb.reset_n <= '1;
-    //     phase.drop_objection(this);
-    // endtask
+    virtual task reset_phase(uvm_phase phase);
+        super.reset_phase(phase);
+        `uvm_info("TRACE",$sformatf("%m"), UVM_HIGH)
+        phase.raise_objection(this);
+        m_vif.driver_cb.frame_n <= '1;
+        m_vif.driver_cb.valid_n <= '1;
+        m_vif.driver_cb.din     <= '0;
+        m_vif.driver_cb.reset_n <= '1;
+        repeat(5) @(m_vif.driver_cb);
+        m_vif.driver_cb.reset_n <= '0;
+        repeat(5) @(m_vif.driver_cb);
+        m_vif.driver_cb.reset_n <= '1;
+        phase.drop_objection(this);
+    endtask
 
-    virtual function build_phase(uvm_phase phase);
+    virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         //从上一层获取配置
         if(!uvm_config_db#(int unsigned)::get(this,"","pad_cycles",pad_cycles)) begin
             `uvm_fatal("CONFIG_ERROR","Driver can not get the pad_cycles !!!")
         end
-        $$display("pad_cycles = %0d",pad_cycles);
+        $display("pad_cycles = %0d",pad_cycles);
 
         if(!uvm_config_db#(virtual dut_interface)::get(this,"","vif",m_vif)) begin
             `uvm_fatal("CONFIG_ERROR","Driver can not get the interface !!!")

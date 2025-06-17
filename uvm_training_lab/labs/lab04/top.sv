@@ -1,6 +1,6 @@
-program automatic top_tb;
+// program automatic top_tb;
     `include "../../rtl/router.v"
-	 import uvm_pkg::*;
+	import uvm_pkg::*;
 	`include "uvm_macros.svh"
 	`include "dut_interface.sv"
 	`include "my_transaction.sv"
@@ -16,8 +16,8 @@ program automatic top_tb;
 	`include "my_test_inst_da3.sv"
 	`include "my_driver_count.sv"
 	// `include "my_test_type_driver.sv"
-	// `include "my_test_inst_driver.sv"
-endprogram
+	// `include "my_test_inst_driver.sv"   
+// endprogram
 
 module top;
     bit sys_clk;
@@ -32,7 +32,7 @@ module top;
                 .dout      (inf.dout),
                 .busy_n    (inf.busy_n),
                 .valido_n  (inf.valido_n),
-                .frameo_n  (inf.frameo_n),
+                .frameo_n  (inf.frameo_n)
                 );
 
     initial begin
@@ -42,11 +42,13 @@ module top;
 
     initial begin
         uvm_config_db#(virtual dut_interface)::set(null,"*.m_agent.*","vif",inf);
-        run_test()
+        run_test();
     end
 
-    initial begin
-        $wlfdumpvars();
-    end
+    // initial begin
+    //     $fsdbDumpfile("../tb/top.fsdb");
+    //     $wlfdumpvars(0,top);
+    // end
 
 endmodule
+

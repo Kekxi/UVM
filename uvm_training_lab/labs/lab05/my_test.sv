@@ -10,7 +10,7 @@ class my_test extends uvm_test;
 
     function new(string name= "",uvm_component parent);
         super.new(name,parent);
-        m_env_config = new("m_env_cfg");
+        m_env_cfg = new("m_env_cfg");
     endfunction
 
      virtual function void build_phase(uvm_phase phase);
@@ -25,7 +25,7 @@ class my_test extends uvm_test;
 
         uvm_config_db#(int)::set(this,"*.m_seqr","item_num",20);
         //为配置对象的成员赋值
-        m_env_cfg.is_active = 1; 
+        m_env_cfg.is_coverage = 1; 
         m_env_cfg.is_check  = 1;
         m_env_cfg.m_agent_cfg.is_active  = UVM_ACTIVE;
         m_env_cfg.m_agent_cfg.pad_cycles = 10;

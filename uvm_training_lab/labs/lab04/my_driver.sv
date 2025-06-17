@@ -8,19 +8,24 @@ class my_driver extends uvm_driver #(my_transaction);
     `uvm_component_utils (my_driver)
 
     virtual dut_interface m_vif; // 声明接口的句柄
+
     function new(string name= "my_driver",uvm_component parent);
         super.new(name,parent);
-        uvm_config_db#(virtual dut_interface)::get(this,"","vif",m_vif)
     endfunction
                 
+    virtual function void build_phase(uvm_phase phase);
+        super.build_phase(phase);
+        uvm_config_db#(virtual dut_interface)::get(this,"","vif",m_vif);
+    endfunction
+
     virtual task pre_reset_phase(uvm_phase phase);
         super.pre_reset_phase(phase);
         `uvm_info("TRACE",$sformatf("%m"), UVM_HIGH)
         phase.raise_objection(this);
-        m_vif.driver_cb.frame_n <= `x;
-        m_vif.driver_cb.valid_n <= `x;
-        m_vif.driver_cb.din     <= `x;
-        m_vif.driver_cb.reset_n <= `x;
+        m_vif.driver_cb.frame_n <= 'x;
+        m_vif.driver_cb.valid_n <= 'x;
+        m_vif.driver_cb.din     <= 'x;
+        m_vif.driver_cb.reset_n <= 'x;
         phase.drop_objection(this);
     endtask
                 
@@ -71,8 +76,6 @@ class my_driver extends uvm_driver #(my_transaction);
             end
             m_vif.driver_cb.valid_n[req.sa] <= 1'b1;
             seq_item_port.item_done();    
-            //通知sequencer该事务已经处理完毕
-            seq_item_port.item_done();
         end
     endtask
 endclass
