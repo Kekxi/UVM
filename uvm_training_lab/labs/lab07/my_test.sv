@@ -39,7 +39,17 @@ class my_test extends uvm_test;
                 this,"m_env","env_cfg",m_env_cfg);
 
     endfunction
-            //在start_of_simulation_phase中打印本平台的结构
+
+    //手动启动sequence
+    // virtual task run_phase(uvm_phase phase);
+    //     my_sequence m_seq;
+    //     m_seq = my_sequence::type_id::create("m_seq");
+    //     phase.raise_objection(this);
+    //     m_seq.start(m_env.m_agent.m_seqr);
+    //     phase.drop_objection(this);
+    // endtask 
+
+        //在start_of_simulation_phase中打印本平台的结构
     virtual function void start_of_simulation_phase(uvm_phase phase);
         super.start_of_simulation_phase(phase);
         uvm_top.print_topology();

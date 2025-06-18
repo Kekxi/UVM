@@ -21,6 +21,9 @@ class my_sequence extends uvm_sequence #(my_transaction); // #(my_transation)参
         start_item(tr);
         tr.randomize();
         finish_item(tr);
+        //获取响应
+        get_response(rsp);
+        `uvm_info("SEQ",{"\n","Sequence get the response:\n",rsp.sprint()},UVM_MEDIUM)
     end
     #100;
     endtask
