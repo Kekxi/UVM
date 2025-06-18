@@ -23,7 +23,7 @@ class my_test extends uvm_test;
                             this,  "*.m_seqr.run_phase",
                             "default_sequence",my_sequence::get_type());  
 
-        uvm_config_db#(int)::set(this,"*.m_seqr","item_num",20);
+        uvm_config_db#(int)::set(this,"*.m_seqr","item_num",3);
         //为配置对象的成员赋值
         m_env_cfg.is_coverage = 1; 
         m_env_cfg.is_check  = 1;

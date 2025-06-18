@@ -24,8 +24,8 @@ class master_agent extends uvm_agent;
 
         is_active = m_agent_cfg.is_active;
 
-        uvm_config_db #(int unsigned)::set(this,"m_drive","pad_cycles",m_agent_cfg.pad_cycles);
-        uvm_config_db #(virtual dut_interface)::set(this,"m_drive","vif",m_agent_cfg.m_vif);
+        uvm_config_db #(int unsigned)::set(this,"m_driv","pad_cycles",m_agent_cfg.pad_cycles);
+        uvm_config_db #(virtual dut_interface)::set(this,"m_driv","vif",m_agent_cfg.m_vif);
 
         if(is_active == UVM_ACTIVE) begin
             //使用UVM的factory机制创建对象 
