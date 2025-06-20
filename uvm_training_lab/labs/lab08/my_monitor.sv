@@ -3,8 +3,11 @@ class my_monitor extends uvm_monitor;
     `uvm_component_utils(my_monitor)
     virtual dut_interface m_vif;
 
+    uvm_blocking_put_port #(my_transaction) m2r_port;
+
     function new(string name = "", uvm_component parent);
         super.new(name, parent);
+        this.m2r_port = new("m2r_port",this);
     endfunction
 
     virtual function void build_phase(uvm_phase phase);
@@ -36,7 +39,7 @@ class my_monitor extends uvm_monitor;
                     end
                 end
                 if(active_port != -1) begin
-                    break;
+                 break;
                 end
             end
 
@@ -57,6 +60,7 @@ class my_monitor extends uvm_monitor;
                     count++;
                     if(count == 8) begin
                         tr.payload.push_back(temp);
+                        count=0;
                     end
                 end
 
@@ -70,6 +74,9 @@ class my_monitor extends uvm_monitor;
                 @(m_vif.imonitor_cb);
             end
             `uvm_info("Monitor",{"\n","Monitor Got An Input Transaction: \n",tr.sprint()}, UVM_MEDIUM)
+           
+            `uvm_info("Monitor","Now monitor send the transaction to the reference model!", UVM_MEDIUM)
+            this.m2r_port.put(tr);
         end
     endtask
 

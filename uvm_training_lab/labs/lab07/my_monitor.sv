@@ -1,6 +1,7 @@
 class my_monitor extends uvm_monitor;
 
     `uvm_component_utils(my_monitor)
+
     virtual dut_interface m_vif;
 
     function new(string name = "", uvm_component parent);
@@ -22,6 +23,8 @@ class my_monitor extends uvm_monitor;
         logic [7:0] temp;
         int count;
 
+        // `uvm_info("Monitor","asdkljasdkljas", UVM_MEDIUM)
+
         forever begin
             active_port = -1;
             count       =  0;
@@ -32,13 +35,14 @@ class my_monitor extends uvm_monitor;
                 @(m_vif.imonitor_cb);
                 foreach (m_vif.imonitor_cb.frame_n[i]) begin
                     if(m_vif.imonitor_cb.frame_n[i] == 0) begin
-                        active_port = 1;
+                        active_port = i;
                     end
                 end
-            end
-            if(active_port !=1) begin
+                if(active_port != -1) begin
                  break;
+                end
             end
+
             
             //Get the active port id
             tr.sa = active_port;
@@ -56,6 +60,7 @@ class my_monitor extends uvm_monitor;
                     count++;
                     if(count == 8) begin
                         tr.payload.push_back(temp);
+                        count=0;
                     end
                 end
 

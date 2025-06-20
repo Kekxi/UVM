@@ -35,6 +35,6 @@ interface dut_interface(input bit clk);
 
     modport  driver(clocking driver_cb, output reset_n);
     modport  imonitor(clocking imonitor_cb);
-    modport  omonitor(clocking o_monitor_cb);
+    modport  o_monitor(clocking o_monitor_cb);
 
 endinterface 

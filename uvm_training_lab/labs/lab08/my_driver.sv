@@ -85,8 +85,14 @@ class my_driver extends uvm_driver #(my_transaction);
                 end
             end
             m_vif.driver_cb.valid_n[req.sa] <= 1'b1;
-            //通知sequencer该事务已经处理完毕
-            seq_item_port.item_done();
+
+            //产生响应并关联事务
+            rsp = my_transaction::type_id::create("rsq");
+            $cast(rsp,req.clone());
+            rsp.set_id_info(req);
+            seq_item_port.put_response(rsp);
+
+            seq_item_port.item_done();    
         end
     endtask
 endclass
