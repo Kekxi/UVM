@@ -21,7 +21,7 @@ class my_test extends uvm_test;
         //使用uvm_config机制配置agent sequencer的default_sequence
         uvm_config_db#(uvm_object_wrapper)::set(
                             this,  "*.m_seqr.run_phase",
-                            "default_sequence",my_sequence::get_type());  
+                            "default_sequence",my_sequence_lib::get_type());  
 
         uvm_config_db#(int)::set(this,"*.m_seqr","item_num",3);
         //为配置对象的成员赋值

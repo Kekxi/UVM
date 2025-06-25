@@ -1,4 +1,4 @@
-// typedef class my_driver;
+typedef class my_driver;
 
 class driver_base_callback extends uvm_callback;
     function new(string name="driver_base_callback");

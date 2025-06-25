@@ -18,7 +18,7 @@ class slave_agent extends uvm_agent;
         end        
 
         uvm_config_db#(virtual dut_interface)::set(this, "m_moni", "vif", m_agent_cfg.m_vif);
-        m_moni = my_monitor::type_id::create("m_moni",this);
+        m_moni = out_monitor::type_id::create("m_moni",this);
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);

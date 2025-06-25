@@ -6,6 +6,8 @@
 	`include "my_transaction.sv"
 	`include "my_transaction_da3.sv"
     `include "my_sequence.sv"
+    `include "my_sequence_lib.sv"
+    `include "my_callback.sv"
 	`include "my_driver.sv"
     `include "my_sequencer.sv"
 	`include "my_monitor.sv"
@@ -20,6 +22,7 @@
 	`include "my_test.sv"
 	`include "my_test_type_da3.sv"
 	`include "my_test_inst_da3.sv"
+	`include "my_test_driver_error.sv"
 	`include "my_driver_count.sv"
 
     

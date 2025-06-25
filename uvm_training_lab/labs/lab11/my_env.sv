@@ -47,9 +47,11 @@ class  my_env extends uvm_env;
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
         `uvm_info("ENV","Connect the agent and reference model ...",UVM_MEDIUM)
+
         m_agent.m_a2r_export.connect(ref_model.i_m2r_imp);
-        s_agent.s_a2s_export.connect(this.s_a2s_fifo.blocking_get_export);
-        ref_model.r2s_port.connect(this.r2s_fifo.blocking_get_export);
+        s_agent.s_a2s_export.connect(this.s_a2s_fifo.blocking_put_export);
+        ref_model.r2s_port.connect(this.r2s_fifo.blocking_put_export);
+        
         if(m_env_cfg.is_check) begin
             sb.r2s_port.connect(this.r2s_fifo.blocking_get_export);
             sb.s_a2s_port.connect(this.s_a2s_fifo.blocking_get_export);
