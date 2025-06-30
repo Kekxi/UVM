@@ -18,6 +18,9 @@ class my_test extends uvm_test;
                             //创建env对象
         m_env = my_env::type_id::create("m_env",this);
 
+        my_sequence_lib::add_typewide_sequence(da3_sequence::get_type());
+        my_sequence_lib::add_typewide_sequence(sa6_sequence::get_type());
+
         //使用uvm_config机制配置agent sequencer的default_sequence
         uvm_config_db#(uvm_object_wrapper)::set(
                             this,  "*.m_seqr.run_phase",
